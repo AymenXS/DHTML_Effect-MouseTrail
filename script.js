@@ -13,7 +13,7 @@ class Particle {
   constructor() {
     this.x = mouse.x;
     this.y = mouse.y;
-    this.size = Math.random() * 15 + 1;
+    this.size = Math.random() * 10 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
     this.color = "hsl(" + hue + ", 100%, 50%)";
@@ -70,7 +70,7 @@ canvas.addEventListener("click", function (event) {
 canvas.addEventListener("mousemove", function (event) {
   mouse.x = event.x;
   mouse.y = event.y;
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     particlesArray.push(new Particle());
   }
 });
