@@ -18,7 +18,7 @@ const mouse = {
 canvas.addEventListener("click", function (event) {
   mouse.x = event.x;
   mouse.y = event.y;
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     particlesArray.push(new Particle());
   }
 });
@@ -26,16 +26,14 @@ canvas.addEventListener("click", function (event) {
 canvas.addEventListener("mousemove", function (event) {
   mouse.x = event.x;
   mouse.y = event.y;
-  for (let i = 0; i < 10; i++) {
-    particlesArray.push(new Particle());
-  }
+  particlesArray.push(new Particle());
 });
 
 class Particle {
   constructor() {
     this.x = mouse.x;
     this.y = mouse.y;
-    this.size = Math.random() * 15 + 1;
+    this.size = Math.random() * 10 + 1;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
     this.color = "hsl(" + hue + ", 100%, 50%)";
@@ -59,28 +57,33 @@ function handleParticles() {
   for (let i = 0; i < particlesArray.length; i++) {
     particlesArray[i].update();
     particlesArray[i].draw();
+
     if (particlesArray[i].size <= 0.3) {
       particlesArray.splice(i, 1);
-      i--; // Omitting it didn't cause any change
     }
-    for (let j = i; j < particlesArray.length; j++){
-      const dx = particlesArray[i].x - particlesArray[j].x; 
-      const dy = particlesArray[i].y - particlesArray[j].y
+
+    for (let j = i; j < particlesArray.length; j++) {
+      const dx = particlesArray[i].x - particlesArray[j].x;
+      const dy = particlesArray[i].y - particlesArray[j].y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 100){
+      if (distance < 100) {
         ctx.beginPath();
-        ctx.moveTo(particlesArray[i].x, particlesArray[i].y)
-        ctx.lineTo(particlesArray[j].x, particlesArray[j].y)
+        ctx.strokeStyle = particlesArray[i].color;
+        ctx.lineWidth = particlesArray[i].size / 10;
+        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
         ctx.stroke();
+        ctx.closePath();
       }
     }
   }
 }
 
 function animate() {
-  ctx.fillStyle = "rgba(0 0 0 / 0.02)";
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Uncomment "clearRect" and comment "ctx.fillStyle + ctx.fillRect" for a different effect; and vice versa
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // ctx.fillStyle = "rgba(0 0 0 / 0.2)";
+  // ctx.fillRect(0, 0, canvas.width, canvas.height);
   hue++;
   handleParticles();
   requestAnimationFrame(animate);
