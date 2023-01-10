@@ -61,7 +61,12 @@ function handleParticles() {
     particlesArray[i].draw();
     if (particlesArray[i].size <= 0.3) {
       particlesArray.splice(i, 1);
-      i--;
+      i--; // Omitting it didn't cause any change
+    }
+    for (let j = i; j < particlesArray.length; j++){
+      const dx = particlesArray[i].x - particlesArray[j].x; 
+      const dy = particlesArray[i].y - particlesArray[j].y
+      const distance = Math.sqrt(dx * dx + dy * dy)
     }
   }
 }
