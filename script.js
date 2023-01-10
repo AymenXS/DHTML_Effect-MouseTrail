@@ -4,32 +4,10 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const particlesArray = [];
 let hue = 0;
-
-window.addEventListener("resize", function () {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
 const mouse = {
   x: undefined,
   y: undefined,
 };
-
-canvas.addEventListener("click", function (event) {
-  mouse.x = event.x;
-  mouse.y = event.y;
-  for (let i = 0; i < 10; i++) {
-    particlesArray.push(new Particle());
-  }
-});
-
-canvas.addEventListener("mousemove", function (event) {
-  mouse.x = event.x;
-  mouse.y = event.y;
-  for (let i = 0; i < 10; i++) {
-    particlesArray.push(new Particle());
-  }
-});
 
 class Particle {
   constructor() {
@@ -75,3 +53,24 @@ function animate() {
   requestAnimationFrame(animate);
 }
 animate();
+
+window.addEventListener("resize", function () {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
+canvas.addEventListener("click", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+  for (let i = 0; i < 10; i++) {
+    particlesArray.push(new Particle());
+  }
+});
+
+canvas.addEventListener("mousemove", function (event) {
+  mouse.x = event.x;
+  mouse.y = event.y;
+  for (let i = 0; i < 10; i++) {
+    particlesArray.push(new Particle());
+  }
+});
